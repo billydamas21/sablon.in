@@ -1,6 +1,12 @@
+<!-- <?php require '../backend/DataTable.php' ?> -->
 <?php include 'templates/headerLink.php' ?>
 <?php include 'templates/topbar.php' ?>
 <?php include 'templates/sidebar.php' ?>
+
+<?php
+
+
+?>
 <!-- Main Content -->
 <div class="main-content">
     <section class="section">
@@ -25,43 +31,46 @@
                                         <th>Status</th>
                                         <th>Time</th>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Sablon Baju</td>
-                                        <td>Sablon</td>
-                                        <td>
-                                            13
-                                        </td>
-                                        <td>INSERT</td>
-                                        <td>2021-10-21 00:35:58</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Sablon Celana</td>
-                                        <td>Sablon</td>
-                                        <td>
-                                            16
-                                        </td>
-                                        <td>UPDATE</td>
-                                        <td>2021-10-21 00:35:58</td>
-                                    </tr>
+                                    <?php $i = $AwalDataRiwayat + 1; ?>
+                                    <!-- Looping Array -->
+                                    <?php foreach ($Riwayat as $row) : ?>
+                                        <tr>
+                                            <td><?= $i; ?></td>
+                                            <td><?= $row['Nama_barang']; ?></td>
+                                            <td><?= $row['Jenis_barang']; ?></td>
+                                            <td><?= $row['Jumlah']; ?></td>
+                                            <td><?= $row['Status']; ?></td>
+                                            <td><?= $row['Time']; ?></td>
+                                        </tr>
+                                        <?php $i++; ?>
+                                    <?php endforeach; ?>
                                 </table>
                             </div>
                         </div>
+
+                        <!-- Pagination -->
                         <div class="card-footer text-right">
                             <nav class="d-inline-block">
                                 <ul class="pagination mb-0">
-                                    <li class="page-item disabled">
-                                        <a class="page-link" href="#" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
-                                    </li>
-                                    <li class="page-item active"><a class="page-link" href="#">1 <span class="sr-only">(current)</span></a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">2</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"><i class="fas fa-chevron-right"></i></a>
-                                    </li>
+                                    <?php if ($HalamanAktifRiwayat > 1) : ?>
+                                        <li class="page-item ">
+                                            <a class="page-link" href="?halaman=<?= $HalamanAktifRiwayat - 1; ?>" tabindex="-1"><i class="fas fa-chevron-left"></i></a>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php for ($i = 1; $i <= $JumlahHalamanRiwayat; $i++) : ?>
+                                        <?php if ($i == $HalamanAktifRiwayat) : ?>
+                                            <li class="page-item active"><a class="page-link" href="?halaman=<?= $i; ?>"><span class="sr-only">(current)</span><?= $i; ?></a></li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+                                    <?php if ($HalamanAktifRiwayat < $JumlahHalamanRiwayat) : ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?halaman=<?= $HalamanAktifRiwayat + 1; ?>"><i class="fas fa-chevron-right"></i></a>
+                                        </li>
+                                    <?php endif; ?>
                                 </ul>
                             </nav>
                         </div>
