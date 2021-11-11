@@ -9,12 +9,16 @@
 <script src="../../assets/js/stisla.js"></script>
 
 <!-- JS Libraies -->
+<script src="../../assets/modules/jquery-ui.min.js"></script>
+<script src="../../assets/modules/datatables.min.js"></script>
+<script src="../../assets/modules/dataTables.bootstrap4.min.js"></script>
 
 <!-- Template JS File -->
 <script src="../../assets/js/scripts.js"></script>
 <script src="../../assets/js/custom.js"></script>
 
 <!-- Page Specific JS File -->
+<script src="../../assets/js/page/modules-datatables.js"></script>
 </body>
 
 </html>
