@@ -1,31 +1,4 @@
-<?php
-// session_start();
-// require 'functions.php';
-
-// if (isset($_POST["login"])) {
-
-//     $username = $_POST["username"];
-//     $password = $_POST["password"];
-
-//     $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-
-//     // cek username
-//     if (mysqli_num_rows($result) === 1) {
-
-//         // cek password
-//         $row = mysqli_fetch_assoc($result);
-//         if (password_verify($password, $row["password"])) {
-//             // session
-//             $_SESSION["login"] = true;
-
-//             header("Location: barang.php");
-//             exit;
-//         }
-//     }
-// }
-
-?>
-
+<?php require '../backend/LoginProccess.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In</title>
+    <title>Login | Sablon.in</title>
     <link rel="stylesheet" href="../../assets/manual/libraries/bootstrap/css/bootstrap.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
@@ -46,7 +19,7 @@
     <div class="container">
         <nav class="row navbar navbar-expand-lg navbar-light bg-white">
             <a class="navbar-brand" href="#">
-                <img src="../../assets/img/sablonin.png" alt="">
+                <img src="../../assets/manual/images/sablonin.png" alt="">
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
                 <span class="navbar-toggler-icon"></span>
@@ -78,26 +51,20 @@
                                 <div class="p-5">
                                     <div class="text-center">
                                         <br>
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome !</h1>
-                                        <br><br>
+                                        <h1 class="h4 text-gray-900 mb-4">Selamat Datang !</h1>
+                                        <br>
                                     </div>
-                                    <form action="" method="POST" class="user">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" name="username" id="username" aria-describedby="emailHelp" placeholder="Username">
+                                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" class="user">
+                                        <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                                            <input type="text" class="form-control form-control-user" name="username" id="username" aria-describedby="emailHelp" placeholder="Username" value="<?php echo $username; ?>" required>
+                                            <span class="help-block text-danger"><?php echo $username_err; ?></span>
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
+                                        <div class=" form-group mb-3 <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
+                                            <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password" required>
+                                            <span class="help-block text-danger"><?php echo $password_err; ?></span>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div>
-                                        <!-- <button type="submit" name="login" class="btn btn-primary btn-user btn-block">
-                                            Sign in</button> -->
-                                        <a class="btn btn-primary btn-user btn-block" href="Dashboard.php">Login</a>
+                                        <button type="submit" name="login" class="btn btn-primary btn-user btn-block" value="Login">
+                                            Login</button>
                                         <br><br>
                                     </form>
                                     <hr>
@@ -106,11 +73,8 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <script src="../../assets/manual/libraries/jquery/jquery-3.6.0.min.js"></script>
